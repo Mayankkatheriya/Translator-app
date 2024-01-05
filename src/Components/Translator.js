@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { selectOptions } from "./TranslateUtils";
 import Languages from "./Languages";
 import axios from "axios";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+// import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
 const Translator = () => {
   const [textInput, setTextInput] = useState("");
@@ -57,15 +57,15 @@ const Translator = () => {
         <div className="input-text">
           <div className="action-btn">
             <button
-             className="action"
-             title = "Start"
-            //  onClick={startListening}
+              className="action"
+              title="Start"
+              //  onClick={startListening}
             >
               <i class="fa-solid fa-microphone-lines"></i>
             </button>
             <button
               className="action"
-              title = "Stop"
+              title="Stop"
               // onClick={() => SpeechRecognition.stopListening()}
             >
               <i class="fa-solid fa-pause"></i>
@@ -89,12 +89,11 @@ const Translator = () => {
 
         {/* Result */}
         <div className="result-text">
-
-        <div className="action-btn">
+          <div className="action-btn">
             <button
-             className="action"
-             title="Copy"
-             onClick={() => navigator.clipboard.writeText(resultText)}
+              className="action"
+              title="Copy"
+              onClick={() => navigator.clipboard.writeText(resultText)}
             >
               <i class="fa-solid fa-copy"></i>
             </button>
