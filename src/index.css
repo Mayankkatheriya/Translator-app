@@ -198,7 +198,8 @@ textarea::placeholder {
 }
 
 .action:hover {
-  transform: scale(1.09);
+  transform: translateY(-2px) scale(1.09) 
+  
 }
 
 @media screen and (max-width: 375px) {
