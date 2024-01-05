@@ -2,12 +2,22 @@ import React, { useState } from "react";
 import { selectOptions } from "./TranslateUtils";
 import Languages from "./Languages";
 import axios from "axios";
+import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 
 const Translator = () => {
   const [textInput, setTextInput] = useState("");
   const [sourceLang, setSourceLang] = useState("en");
   const [targetLang, setTargetLang] = useState("hi");
   const [resultText, setResultText] = useState("");
+  // const { transcript,  browserSupportsSpeechRecognition } = useSpeechRecognition();
+  // const startListening = () => {
+  //   SpeechRecognition.startListening({ continuous: true, language: 'en : US' })
+  //   setTextInput(transcript)
+  // };
+
+  // if (!browserSupportsSpeechRecognition) {
+  //   return <span>Browser doesn't support speech recognition.</span>;
+  // }
 
   const handleTranslate = async () => {
     const url = "https://text-translator2.p.rapidapi.com/translate";
@@ -34,7 +44,7 @@ const Translator = () => {
       }
     } catch (error) {
       console.log(error);
-      alert("Error occurred while translating");
+      alert("Error occurred while translating", error);
     }
   };
 
@@ -43,7 +53,25 @@ const Translator = () => {
       <h1>Translator App</h1>
       <div className="tools">
         {/* User Input */}
+
         <div className="input-text">
+          <div className="action-btn">
+            <button
+             className="action"
+             title = "Start"
+            //  onClick={startListening}
+            >
+              <i class="fa-solid fa-microphone-lines"></i>
+            </button>
+            <button
+              className="action"
+              title = "Stop"
+              // onClick={() => SpeechRecognition.stopListening()}
+            >
+              <i class="fa-solid fa-pause"></i>
+            </button>
+          </div>
+
           {/* DropDown for source languages */}
           <Languages
             id="source"
@@ -53,16 +81,25 @@ const Translator = () => {
           />
           <textarea
             id="text"
-            cols="30"
-            rows="10"
             value={textInput}
-            placeholder="Enter Text"
+            placeholder="Enter Text Here..."
             onChange={(e) => setTextInput(e.target.value)}
           ></textarea>
         </div>
 
         {/* Result */}
         <div className="result-text">
+
+        <div className="action-btn">
+            <button
+             className="action"
+             title="Copy"
+             onClick={() => navigator.clipboard.writeText(resultText)}
+            >
+              <i class="fa-solid fa-copy"></i>
+            </button>
+          </div>
+
           {/* DropDown for Target languages */}
           <Languages
             id="target"
@@ -72,8 +109,6 @@ const Translator = () => {
           />
           <textarea
             id="text"
-            cols="30"
-            rows="10"
             placeholder="Translated Text"
             value={resultText}
             readOnly
@@ -81,7 +116,9 @@ const Translator = () => {
         </div>
       </div>
       {/* Translate button */}
-      <button onClick={handleTranslate}>Translate</button>
+      <button className="tranlate-btn" onClick={handleTranslate}>
+        Translate
+      </button>
     </div>
   );
 };

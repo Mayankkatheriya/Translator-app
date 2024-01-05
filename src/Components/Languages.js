@@ -3,6 +3,7 @@ import React from "react";
 const Languages = ({id, languages, onChange, value}) => {
   return (
     <div className="options">
+      <i className="fa-solid fa-caret-down"></i>
       <select
         id={id}
         name={id}
